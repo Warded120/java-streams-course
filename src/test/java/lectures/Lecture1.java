@@ -6,6 +6,7 @@ import beans.Person;
 
 import com.google.common.collect.ImmutableList;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,13 +21,28 @@ public class Lecture1 {
   public void imperativeApproach() throws IOException {
     List<Person> people = MockData.getPeople();
     // 1. Find people aged less or equal 18
-    // 2. Then change implementation to find first 10 people
+    List<Person> filteredPeople = new ArrayList<>();
 
+    for (Person person : people) {
+      if (person.getAge() <= 18) {
+        filteredPeople.add(person);
+      }
+    }
+
+    // 2. Then change implementation to find first 10 people
+    int limit = 10;
+    for (int i = 0; i < limit; i++) {
+      System.out.println(filteredPeople.get(i));
+    }
   }
 
   @Test
   public void declarativeApproachUsingStreams() throws Exception {
     ImmutableList<Person> people = MockData.getPeople();
-
+    int limit = 10;
+    people.stream()
+            .filter(person -> person.getAge() <= 18)
+            .limit(limit)
+            .forEach(System.out::println);
   }
 }
