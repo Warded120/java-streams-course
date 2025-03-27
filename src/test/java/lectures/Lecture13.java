@@ -19,7 +19,7 @@ public class Lecture13 {
               return car.getPrice();
             })
             .map(price -> {
-              System.out.println("mapping price " + price);
+              System.out.println("mapping price (reducing)" + price);
               return price + (price * .14);
             })
             .collect(Collectors.toList())
